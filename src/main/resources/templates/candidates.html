@@ -24,13 +24,14 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Имя
+                <th scope="col">Кандидаты
             </tr>
             </thead>
             <tbody>
-            <tr th:each="post: ${posts}">
-                <td th:text="${post.id}" />
-                <td th:text="${post.name}" />
+            <tr th:each="candidate: ${candidates}">
+                <td th:text="${candidate.name}" />
+                <td th:text="${candidate.surname}" />
+                <td th:text="${candidate.handle}" />
             </tr>
             </tbody>
         </table>
