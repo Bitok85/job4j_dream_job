@@ -1,42 +1,52 @@
 package ru.job4j.dream.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Candidate {
 
+    private int id;
     private String name;
-    private String surname;
-    private String handle;
+    private String description;
+    private LocalDateTime created;
 
-
-    public Candidate(String name, String surname, String handle) {
+    public Candidate(int id, String name, String description, LocalDateTime created) {
+        this.id = id;
         this.name = name;
-        this.surname = surname;
-        this.handle = handle;
+        this.description = description;
+        this.created = created;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getHandle() {
-        return handle;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getDescription() {
+        return description;
     }
 
-    public void setHandle(String handle) {
-        this.handle = handle;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     @Override
@@ -48,11 +58,11 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return Objects.equals(name, candidate.name) && Objects.equals(surname, candidate.surname);
+        return id == candidate.id && Objects.equals(name, candidate.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname);
+        return Objects.hash(id, name);
     }
 }
