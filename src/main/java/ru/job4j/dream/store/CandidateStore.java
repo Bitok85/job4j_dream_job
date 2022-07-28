@@ -1,6 +1,6 @@
-package dream.store;
+package ru.job4j.dream.store;
 
-import dream.model.Candidate;
+import ru.job4j.dream.model.Candidate;
 
 import java.util.Collection;
 import java.util.Map;

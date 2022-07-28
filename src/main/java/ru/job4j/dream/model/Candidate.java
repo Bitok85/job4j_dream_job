@@ -1,4 +1,4 @@
-package dream.model;
+package ru.job4j.dream.model;
 
 import java.util.Objects;
 
