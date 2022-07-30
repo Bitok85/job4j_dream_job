@@ -24,4 +24,13 @@ public class PostStore {
     public Collection<Post> findAll() {
         return posts.values();
     }
+
+    /**
+     *
+     * временное решение, предполагается что ключи мапы вводятся по порядку возрастания без пропусков
+     */
+    public void add(Post post) {
+        posts.put(posts.size() + 1, post);
+    }
+
 }
