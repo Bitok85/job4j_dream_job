@@ -20,7 +20,6 @@ public class PostStore {
         key = new AtomicInteger(posts.size());
     }
 
-
     public static PostStore instOf() {
         return INST;
     }
@@ -33,5 +32,12 @@ public class PostStore {
         post.setId(key.incrementAndGet());
         post.setCreated(LocalDateTime.now());
         posts.put(post.getId(), post);
+    }
+
+    public Post findById(int id) {
+        return posts.get(id);
+    }
+
+    public void update(Post post) {
     }
 }
