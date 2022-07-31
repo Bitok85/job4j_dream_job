@@ -12,8 +12,7 @@ public class PostStore {
 
     private static final PostStore INST = new PostStore();
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
-    private final AtomicInteger key = new AtomicInteger(0);
-
+    private final AtomicInteger key = new AtomicInteger(posts.size());
     private PostStore() {
         posts.put(1, new Post(1, "Junior Java Job", "some text", LocalDateTime.now()));
         posts.put(2, new Post(2, "Middle Java Job", "some text", LocalDateTime.now()));
@@ -29,7 +28,6 @@ public class PostStore {
     }
 
     public void add(Post post) {
-        key.set(posts.size());
         post.setId(key.incrementAndGet());
         post.setCreated(LocalDateTime.now());
         posts.put(post.getId(), post);
