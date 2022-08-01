@@ -27,8 +27,8 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/fromUpdatePost{postId}")
-    public String fromUpdatePost(Model model, @PathVariable("postId") int id) {
+    @GetMapping("/formUpdatePost/{postId}")
+    public String formUpdatePost(Model model, @PathVariable("postId") int id) {
         model.addAttribute("post", store.findById(id));
         return "updatePost";
     }

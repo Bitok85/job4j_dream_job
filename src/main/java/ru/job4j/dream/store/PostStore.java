@@ -39,5 +39,7 @@ public class PostStore {
     }
 
     public void update(Post post) {
+        post.setCreated(posts.get(post.getId()).getCreated());
+        posts.replace(post.getId(), post);
     }
 }
