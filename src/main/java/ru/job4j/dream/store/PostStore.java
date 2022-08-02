@@ -42,4 +42,6 @@ public class PostStore {
         post.setCreated(posts.get(post.getId()).getCreated());
         posts.replace(post.getId(), post);
     }
+
+
 }
