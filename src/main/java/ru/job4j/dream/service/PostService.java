@@ -7,6 +7,12 @@ import java.util.Collection;
 
 public class PostService {
 
+    private static final PostService INST = new PostService();
+
+    public static PostService instOf() {
+        return INST;
+    }
+
     private final PostStore store = PostStore.instOf();
 
     public Collection<Post> findAll() {
