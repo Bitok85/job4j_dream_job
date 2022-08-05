@@ -32,6 +32,7 @@
                 <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
                 <a class="nav-item nav-link" th:href="@{/index}">Главная</a>
                 <a class="nav-item nav-link" th:href="@{/addPost}">Добавить вакансию</a>
+                <a class="nav-item nav-link" th:href="@{/addCandidate}">Добавить кандидата</a>
             </div>
         </div>
     </nav>
@@ -51,6 +52,12 @@
                         <i class="fa fa-edit"></i>
                     </a>
                     <span th:text="${candidate.name}"></span>
+                    <span th:if="${candidate.visible}">
+                        <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span th:if="${!candidate.visible}">
+                        <i class="fa fa-square-o"></i>
+                    </span>
                 </td>
                 <td th:text="${candidate.description}" />
                 <td th:text="${#temporals.format(candidate.created, 'dd-MM-yyyy HH:mm')}" />

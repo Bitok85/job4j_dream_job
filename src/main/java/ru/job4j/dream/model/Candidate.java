@@ -9,6 +9,7 @@ public class Candidate {
     private String name;
     private String description;
     private LocalDateTime created;
+    private boolean visible;
 
     public Candidate() {
     }
@@ -55,6 +56,14 @@ public class Candidate {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
     }
 
     @Override
