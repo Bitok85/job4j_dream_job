@@ -1,16 +1,13 @@
 package ru.job4j.dream.control;
 
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
@@ -32,9 +29,16 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
+        post.setCity(cityService.findById(id));
         postService.add(post);
         return "redirect:/posts";
+    }
+
+    @GetMapping ("/addPost")
+    public String addPost(Model model) {
+        model.addAttribute("cities", cityService.getAllCities());
+        return "addPost";
     }
 
     @GetMapping("/formUpdatePost/{postId}")
@@ -45,7 +49,8 @@ public class PostController {
     }
 
     @PostMapping("/updatePost")
-    public String updatePost(@ModelAttribute Post post) {
+    public String updatePost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
+        post.setCity(cityService.findById(id));
         postService.update(post);
         return "redirect:/posts";
     }
