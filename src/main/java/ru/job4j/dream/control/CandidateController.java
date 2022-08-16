@@ -33,7 +33,7 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate,
-                                  @RequestParam("file")MultipartFile file) throws IOException {
+                                  @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setPhoto(file.getBytes());
         candidateService.add(candidate);
         return "redirect:/candidates";
@@ -46,8 +46,10 @@ public class CandidateController {
     }
 
     @PostMapping("/updateCandidate")
-    public String updatePost(@ModelAttribute Candidate candidate) {
+    public String updatePost(@ModelAttribute Candidate candidate,
+                             @RequestParam("file") MultipartFile file) throws IOException {
         candidateService.update(candidate);
+        candidate.setPhoto(file.getBytes());
         return "redirect:/candidates";
     }
 
