@@ -63,11 +63,12 @@ public class PostDBStore {
         boolean result = false;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("UPDATE post SET name = ?, description = ?, created = ?")
+                     cn.prepareStatement("UPDATE post SET name = ?, description = ?, created = ? where id = ?")
         ) {
             ps.setString(1, post.getName());
             ps.setString(2, post.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
+            ps.setInt(4, post.getId());
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
