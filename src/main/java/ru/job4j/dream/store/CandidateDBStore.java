@@ -64,11 +64,12 @@ public class CandidateDBStore {
         boolean result = false;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("UPDATE candidate SET name = ?, description = ?, created = ?")
+                     cn.prepareStatement("UPDATE candidate SET name = ?, description = ?, created = ? where id = ?")
         ) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setInt(4, candidate.getId());
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
