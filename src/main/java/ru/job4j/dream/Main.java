@@ -1,9 +1,12 @@
 package ru.job4j.dream;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import ru.job4j.dream.store.PostDBStore;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
