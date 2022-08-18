@@ -18,7 +18,6 @@ import java.util.List;
 public class CandidateDBStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
-
     private final BasicDataSource pool;
 
     public CandidateDBStore(BasicDataSource pool) {

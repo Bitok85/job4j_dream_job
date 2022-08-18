@@ -17,7 +17,6 @@ import java.util.List;
 public class PostDBStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
-
     private final BasicDataSource pool;
 
     public PostDBStore(BasicDataSource pool) {
