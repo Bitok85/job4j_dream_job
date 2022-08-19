@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS candidate (
    name text,
    description text,
    created timestamp,
-   visiblea boolean
+   visiblea boolean,
+   photo bytea
 );
 
 CREATE TABLE IF NOT EXISTS users (

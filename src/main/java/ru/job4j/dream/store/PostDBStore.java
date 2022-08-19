@@ -1,8 +1,8 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dream.model.Post;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class PostDBStore {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
+    private static final Logger LOG = LogManager.getLogger(PostDBStore.class.getName());
     private final BasicDataSource pool;
 
     public PostDBStore(BasicDataSource pool) {
