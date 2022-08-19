@@ -13,13 +13,11 @@ class UserDBStoreTest {
     private static BasicDataSource pool = new Main().loadPool();
 
     /**
-    @Ignore
     @Test
     public void whenAddUser() {
         UserDBStore store = new UserDBStore(pool);
         User user = new User("123@gmail.com", "123");
         assertThat(store.add(user).get()).isEqualTo(user);
-        assertThat(store.add(user).get()).isEqualTo(user);
-    }
-    */
+        assertThat(store.add(user).isEmpty()).isTrue();
+    }*/
 }

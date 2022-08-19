@@ -18,7 +18,7 @@ public class UserDbController {
         this.userService = userService;
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/regitration")
     public String registration(Model model, @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
