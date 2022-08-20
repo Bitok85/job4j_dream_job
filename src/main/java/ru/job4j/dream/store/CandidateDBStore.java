@@ -45,12 +45,15 @@ public class CandidateDBStore {
 
     public Candidate add(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, description, created) VALUES(?, ?, ?)",
+             PreparedStatement ps
+                     = cn.prepareStatement("INSERT INTO candidate(name, description, created, visiblea, photo) VALUES(?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setBoolean(4, candidate.isVisible());
+            ps.setBytes(5, candidate.getPhoto());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -67,12 +70,14 @@ public class CandidateDBStore {
         boolean result = false;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("UPDATE candidate SET name = ?, description = ?, created = ? where id = ?")
+                     cn.prepareStatement("UPDATE candidate SET name = ?, description = ?, created = ?, visiblea = ?, photo = ? where id = ?")
         ) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
             ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
-            ps.setInt(4, candidate.getId());
+            ps.setBoolean(4, candidate.isVisible());
+            ps.setBytes(5, candidate.getPhoto());
+            ps.setInt(6, candidate.getId());
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             LOG.error("Exception", e);

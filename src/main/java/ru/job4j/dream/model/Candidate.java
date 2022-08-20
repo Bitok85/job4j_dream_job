@@ -27,6 +27,15 @@ public class Candidate {
         this.created = created;
     }
 
+    public Candidate(int id, String name, String description, LocalDateTime created, boolean visible, byte[] photo) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.visible = visible;
+        this.photo = photo;
+    }
+
     public int getId() {
         return id;
     }
@@ -63,9 +72,6 @@ public class Candidate {
         return visible;
     }
 
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
-    }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
