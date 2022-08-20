@@ -31,6 +31,11 @@ public class CandidateController {
         return "candidates";
     }
 
+    @GetMapping("/addCandidate")
+    public String addCandidate(Model model) {
+        return "addCandidate";
+    }
+
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate,
                                   @RequestParam("file") MultipartFile file) throws IOException {
