@@ -2,6 +2,7 @@ package ru.job4j.dream.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dream.model.User;
@@ -18,7 +19,12 @@ public class UserDbController {
         this.userService = userService;
     }
 
-    @PostMapping("/regitration")
+    @GetMapping("/regUser")
+    public String regUser(Model model) {
+        return "regUser";
+    }
+
+    @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
