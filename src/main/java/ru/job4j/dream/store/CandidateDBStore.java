@@ -34,7 +34,10 @@ public class CandidateDBStore {
                     candidates.add(new Candidate(resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getString("description"),
-                            resultSet.getTimestamp("created").toLocalDateTime()));
+                            resultSet.getTimestamp("created").toLocalDateTime(),
+                            resultSet.getBoolean("visiblea"),
+                            resultSet.getBytes("photo")
+                    ));
                 }
             }
         } catch (Exception e) {
@@ -96,7 +99,9 @@ public class CandidateDBStore {
                             it.getInt("id"),
                             it.getString("name"),
                             it.getString("description"),
-                            it.getTimestamp("created").toLocalDateTime()
+                            it.getTimestamp("created").toLocalDateTime(),
+                            it.getBoolean("visiblea"),
+                            it.getBytes("photo")
                     );
                 }
             }
