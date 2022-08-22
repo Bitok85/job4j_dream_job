@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dream.model.User;
 import ru.job4j.dream.service.UserService;
 
@@ -20,8 +21,8 @@ public class UserDbController {
     }
 
     @GetMapping("/regUser")
-    public String regUser(Model model) {
-        model.addAttribute("fail");
+    public String regUser(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
+        model.addAttribute("fail", fail != null);
         return "regUser";
     }
 
@@ -29,6 +30,7 @@ public class UserDbController {
     public String registration(Model model, @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
+            model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "redirect:/regUser?fail=true";
         }
         return "redirect:/regUser";
