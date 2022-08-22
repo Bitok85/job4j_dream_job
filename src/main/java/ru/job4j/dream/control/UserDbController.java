@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dream.model.User;
 import ru.job4j.dream.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -42,13 +44,15 @@ public class UserDbController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute User user) {
+    public String login(@ModelAttribute User user, HttpServletRequest request) {
         Optional<User> userDb = userService.findUserByEmailAndPassword(
                 user.getEmail(), user.getPassword()
         );
         if (userDb.isEmpty()) {
             return "redirect:/loginPage?fail=true";
         }
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userDb.get());
         return "redirect:/index";
     }
 }
