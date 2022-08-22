@@ -43,15 +43,15 @@ public class UserDBStore {
         return result;
     }
 
-    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
         Optional<User> result = Optional.empty();
         try (Connection cn = pool.getConnection();
-            PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE email = ? AND PASSWORD = ?")
+            PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?")
         ) {
             ps.setString(1, email);
             ps.setString(2, password);
             try (ResultSet resultSet = ps.executeQuery()) {
-                if (resultSet.isBeforeFirst()) {
+                if (resultSet.next()) {
                     User user = new User(
                             resultSet.getInt("id"),
                             resultSet.getString("email"),
