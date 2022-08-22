@@ -30,7 +30,6 @@ public class UserDbController {
     public String registration(Model model, @ModelAttribute User user) {
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "redirect:/regUser?fail=true";
         }
         return "redirect:/regUser";
