@@ -21,6 +21,13 @@ public class AuthFilter implements Filter {
             filterChain.doFilter(req, res);
             return;
         }
+        if (uri.endsWith("regUser") || uri.endsWith("registration")) {
+            filterChain.doFilter(req, res);
+            return;
+        }
+        if (uri.endsWith("index")) {
+            filterChain.doFilter(req, res);
+        }
         if (req.getSession().getAttribute("user") == null) {
             res.sendRedirect(req.getContextPath() + "/loginPage");
             return;
