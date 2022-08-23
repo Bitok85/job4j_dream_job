@@ -9,6 +9,7 @@ import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import ru.job4j.dream.utils.UserCheck;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,12 +28,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String posts(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         model.addAttribute("posts", postService.findAll());
         return "posts";
     }
@@ -46,24 +42,14 @@ public class PostController {
 
     @GetMapping ("/addPost")
     public String addPost(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         model.addAttribute("cities", cityService.getAllCities());
         return "addPost";
     }
 
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         model.addAttribute("post", postService.findById(id));
         model.addAttribute("cities", cityService.getAllCities());
         return "updatePost";

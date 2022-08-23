@@ -13,6 +13,7 @@ import ru.job4j.dream.model.User;
 import ru.job4j.dream.service.CandidateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import ru.job4j.dream.utils.UserCheck;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -29,24 +30,14 @@ public class CandidateController {
 
     @GetMapping("/candidates")
     public String candidates(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates";
     }
 
     @GetMapping("/addCandidate")
     public String addCandidate(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         return "addCandidate";
     }
 
@@ -60,12 +51,7 @@ public class CandidateController {
 
     @GetMapping("/formUpdateCandidate/{candidateId}")
     public String formUpdateCandidate(Model model, @PathVariable("candidateId") int id, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+        UserCheck.checkForGuestOrExisting(model, session);
         model.addAttribute("candidate", candidateService.findById(id));
         return "updateCandidate";
     }
